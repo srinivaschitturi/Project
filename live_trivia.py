@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul 11 21:50:57 2018
-
-@author: srini
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Tue Jun 12 17:11:07 2018
 
 @author: srini
@@ -15,25 +8,21 @@ Created on Tue Jun 12 17:11:07 2018
 from PIL import Image
 import pytesseract
 import webbrowser
-#import robobrowser
+import robobrowser
 from bs4 import BeautifulSoup, SoupStrainer
 import urllib.request  as urllib2 
 from lxml import html
 import httplib2
 import os
+import nltk
 #import re
 path='C:\\Users\\srini\\Documents\\AirDroid\\ScreenShot\\MotoG3_ScreenShot_20180711.jpg'
 img=Image.open(path)
 #img=Image.open('C:\\Users\\srini\\Downloads\\bigmac.png')
-question=img.crop((50,430,650,637))
-option1=img.crop((120,640,600,790))
-option2=img.crop((120,790,600,940))
-option3=img.crop((120,940,600,1090))
-
-#question=img.crop((50,460,650,667))
-#option1=img.crop((120,670,600,820))
-#option2=img.crop((120,820,600,970))
-#option3=img.crop((120,970,600,1120))
+question=img.crop((20,400,720,587))
+option1=img.crop((120,587,600,687))
+option2=img.crop((120,687,600,787))
+option3=img.crop((120,787,600,900))
 #img.save('C:\\Users\\srini\\Documents\\AirDroid\\ScreenShot\\MotoG3_ScreenShot_20180612.jpg', dpi=(600,600))
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
@@ -41,6 +30,13 @@ questiontext=pytesseract.image_to_string(question)
 option1text=pytesseract.image_to_string(option1)
 option2text=pytesseract.image_to_string(option2)
 option3text=pytesseract.image_to_string(option3)
+
+# Implement NLTK's noun only phrases to better the search query
+text = nltk.pos_tag(questiontext)
+
+
+
+
 url1='http://www.google.com/search?q=';
 url2='http://www.bing.com/search?q=';
 url1=url1+questiontext
